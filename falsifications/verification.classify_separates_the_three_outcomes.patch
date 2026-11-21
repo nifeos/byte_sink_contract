@@ -1,0 +1,20 @@
+Falsifies `byte_sink_contract::verification::classify_separates_the_three_outcomes`.
+
+The defect: `classify` reads a return of zero as a missing sink, so a delivered message is
+reported as written into the void.
+
+Expected to fail: the harness's claim that `Ok` is exactly a non-negative return; Kani reports it
+failing at a return of 0.
+
+diff --git a/src/lib.rs b/src/lib.rs
+--- a/src/lib.rs
++++ b/src/lib.rs
+@@ -346,7 +346,7 @@
+ /// channel to report on, its only channel being the broken one. The conservative reading keeps it
+ /// running; the alternative kills a program because its spawner was careless.
+ pub const fn classify(returned: i64) -> Sent {
+-    if returned >= 0 {
++    if returned > 0 {
+         Sent::Ok
+     } else if returned == GONE {
+         Sent::Gone

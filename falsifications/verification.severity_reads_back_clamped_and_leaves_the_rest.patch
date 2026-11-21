@@ -1,0 +1,20 @@
+Falsifies `byte_sink_contract::verification::severity_reads_back_clamped_and_leaves_the_rest`.
+
+The defect: `with_severity` clamps a level past debug to eight, a value `severity` does not read
+as a level, so the clamped level reads back as unset.
+
+Expected to fail: the harness's claim that the level reads back as `min(level, 7)`; Kani reports
+it failing for any level above 7.
+
+diff --git a/src/lib.rs b/src/lib.rs
+--- a/src/lib.rs
++++ b/src/lib.rs
+@@ -233,7 +233,7 @@
+ /// least alarming reading of a level nobody defined). It acts on any first word, but only a bytes
+ /// message's bits are read.
+ pub const fn with_severity(word_zero: u64, level: u8) -> u64 {
+-    let level = if level > 7 { 7 } else { level };
++    let level = if level > 7 { 8 } else { level };
+     (word_zero & !(0xff << SEVERITY_SHIFT)) | (((level as u64) + 1) << SEVERITY_SHIFT)
+ }
+ 

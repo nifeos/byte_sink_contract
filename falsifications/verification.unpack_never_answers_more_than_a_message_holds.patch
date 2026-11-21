@@ -1,0 +1,20 @@
+Falsifies `byte_sink_contract::verification::unpack_never_answers_more_than_a_message_holds`.
+
+The defect: `unpack` lets a count one past the inline maximum through, so a message claiming
+seventeen bytes decodes as seventeen.
+
+Expected to fail: the harness's claim that `n <= MAXIMUM_INLINE_BYTES`; Kani reports it failing at a
+count of 17.
+
+diff --git a/src/lib.rs b/src/lib.rs
+--- a/src/lib.rs
++++ b/src/lib.rs
+@@ -307,7 +307,7 @@
+     match operation(word_zero) {
+         OPERATION_BYTES => {
+             // Compared as `u64`, so a target whose `usize` is narrower cannot truncate the count.
+-            if word_zero & 0xffff_ffff > MAXIMUM_INLINE_BYTES as u64 || kind(word_zero) != KIND_TEXT
++            if word_zero & 0xffff_ffff > MAXIMUM_INLINE_BYTES as u64 + 1 || kind(word_zero) != KIND_TEXT
+             {
+                 return Message::Malformed;
+             }

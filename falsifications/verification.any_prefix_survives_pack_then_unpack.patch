@@ -1,0 +1,20 @@
+Falsifies `byte_sink_contract::verification::any_prefix_survives_pack_then_unpack`.
+
+The defect: `pack` fills the third word from the first eight bytes instead of the last eight, so
+a message longer than eight bytes carries its first half twice.
+
+Expected to fail: the harness's claim that the unpacked bytes equal the source; Kani reports the
+comparison failing at `n = 9`.
+
+diff --git a/src/lib.rs b/src/lib.rs
+--- a/src/lib.rs
++++ b/src/lib.rs
+@@ -187,7 +187,7 @@
+     let mut lo = [0u8; 8];
+     let mut hi = [0u8; 8];
+     lo.copy_from_slice(&words[..8]);
+-    hi.copy_from_slice(&words[8..]);
++    hi.copy_from_slice(&words[..8]);
+     (
+         MessageWords::new(
+             first_word(OPERATION_BYTES, n as u32),
