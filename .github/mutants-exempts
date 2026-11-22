@@ -3,5 +3,7 @@
 # A line without a reason is refused, and a line naming a survivor that no longer exists is
 # refused too, so this list can only shrink by a diff that says why.
 
-# Mutation census row carried from the source tree, as counts: caught 73, missed 4, timeout 0, unviable 2.
-# The 4 missed mutant(s) are not listed here because the census did not record which; the first weekly mutation run names each, and each goes below as `<file>:<line> # <reason>`.
+src/lib.rs:95 # the opcode sits in bits 63:56 and a u32 count in bits 31:0, so | and ^ give the same word
+src/lib.rs:180 # a slice of exactly MAXIMUM_INLINE_BYTES takes MAXIMUM_INLINE_BYTES on either branch, so < and <= give the same count
+src/lib.rs:236 # a level of exactly 7 is clamped to 7, so > and >= give the same level
+src/lib.rs:237 # the severity byte is cleared before the or, so | and ^ give the same word
