@@ -1,9 +1,9 @@
 # byte_sink_contract
 
-[![check](https://github.com/nifeos/byte_sink_contract/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/nifeos/byte_sink_contract/actions/workflows/ci.yml?query=branch%3Amain)
-[![proofs](https://github.com/nifeos/byte_sink_contract/actions/workflows/proofs.yml/badge.svg?branch=main)](https://github.com/nifeos/byte_sink_contract/actions/workflows/proofs.yml?query=branch%3Amain)
-[![license](https://img.shields.io/badge/license-MIT%20OR%20Apache--2.0-blue.svg)](https://github.com/nifeos/byte_sink_contract#license)
-[![minimum Rust version](https://img.shields.io/badge/rust-1.88%2B-blue.svg)](https://github.com/nifeos/byte_sink_contract/blob/main/Cargo.toml)
+[![check](https://github.com/partsfoundry/byte_sink_contract/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/partsfoundry/byte_sink_contract/actions/workflows/ci.yml?query=branch%3Amain)
+[![proofs](https://github.com/partsfoundry/byte_sink_contract/actions/workflows/proofs.yml/badge.svg?branch=main)](https://github.com/partsfoundry/byte_sink_contract/actions/workflows/proofs.yml?query=branch%3Amain)
+[![license](https://img.shields.io/badge/license-MIT%20OR%20Apache--2.0-blue.svg)](https://github.com/partsfoundry/byte_sink_contract#license)
+[![minimum Rust version](https://img.shields.io/badge/rust-1.88%2B-blue.svg)](https://github.com/partsfoundry/byte_sink_contract/blob/main/Cargo.toml)
 
 One framing for "write these bytes there".
 
